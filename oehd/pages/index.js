@@ -1,8 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
+import DelugeRPC from "deluge-rpc";
 import styles from "../styles/Home.module.css";
 import mitch from "../mitch.json";
-import DelugeRPC from "deluge-rpc";
+import { rand } from "../utils.js";
 
 const Card = ({ cardInfo }) => {
   return (
@@ -29,11 +30,6 @@ export default function Home({ info }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>{info.mitch}</h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
 
         <div className={styles.grid}>
           <Card cardInfo={info.deluge}></Card>
@@ -84,12 +80,8 @@ async function getDelugeInfo() {
   };
 }
 
-function rand(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 export async function getServerSideProps(context) {
-  const mitchQuote = mitch[rand(0, mitch.length)];
+  const mitchQuote = mitch[rand(0, mitch.length - 1)];
   const deluge = await getDelugeInfo();
 
   const info = { ["mitch"]: mitchQuote, ["deluge"]: deluge };
