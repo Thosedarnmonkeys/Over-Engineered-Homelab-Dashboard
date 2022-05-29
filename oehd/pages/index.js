@@ -8,13 +8,20 @@ import { rand } from "../utils.js";
 const Card = ({ cardInfo }) => {
   return (
     <a className={styles.card} href={cardInfo.link}>
-      <div>
+      <section>
         <h2>{cardInfo.title}</h2>
-        <Image src={cardInfo.imagePath} width={50} height={50}></Image>
-      </div>
-      <p>Down: {cardInfo.details.downBytes}B</p>
-      <p>Up: {cardInfo.details.upBytes}B</p>
-      <p>Torrents: {cardInfo.details.torrentCount}</p>
+        <Image
+          src={cardInfo.imagePath}
+          width={40}
+          height={40}
+          layout={"fixed"}
+        ></Image>
+      </section>
+      <section>
+        <p>Down: {cardInfo.details.downBytes}B</p>
+        <p>Up: {cardInfo.details.upBytes}B</p>
+        <p>Torrents: {cardInfo.details.torrentCount}</p>
+      </section>
     </a>
   );
 };
