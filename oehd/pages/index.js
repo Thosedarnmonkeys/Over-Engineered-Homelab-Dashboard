@@ -8,10 +8,10 @@ import { rand } from "../utils.js";
 const Card = ({ cardInfo }) => {
   return (
     <a className={styles.card} href={cardInfo.link}>
-      <header>
+      <div>
         <h2>{cardInfo.title}</h2>
         <Image src={cardInfo.imagePath} width={50} height={50}></Image>
-      </header>
+      </div>
       <p>Down: {cardInfo.details.downBytes}B</p>
       <p>Up: {cardInfo.details.upBytes}B</p>
       <p>Torrents: {cardInfo.details.torrentCount}</p>
@@ -21,16 +21,21 @@ const Card = ({ cardInfo }) => {
 
 export default function Home({ info }) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Dashboard</title>
         <meta name="description" content="Over Engineered Homelab Dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>{info.mitch}</h1>
+      <header className={styles.header}>
+        <div>
+          <h1>OEHD</h1>
+          <span>{info.mitch}</span>
+        </div>
+      </header>
 
+      <main className={styles.main}>
         <div className={styles.grid}>
           <Card cardInfo={info.deluge}></Card>
         </div>
