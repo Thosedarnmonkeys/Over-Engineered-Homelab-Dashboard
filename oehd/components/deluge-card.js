@@ -1,13 +1,13 @@
-//import Card from "./card";
+import Card from "./card";
 import DelugeRPC from "deluge-rpc";
 
 export default function DelugeCard({ cardInfo }) {
   return (
-    <div cardInfo={cardInfo}>
+    <Card cardInfo={cardInfo}>
       <p>Down: {cardInfo.details.downBytes}B</p>
       <p>Up: {cardInfo.details.upBytes}B</p>
       <p>Torrents: {cardInfo.details.torrentCount}</p>
-    </div>
+    </Card>
   );
 }
 

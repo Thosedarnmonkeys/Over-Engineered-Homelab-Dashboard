@@ -1,27 +1,26 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import mitch from "../mitch.json";
 import { rand } from "../utils.js";
 import DelugeCard, { getDelugeInfo } from "../components/deluge-card";
 
 export default function Home({ info }) {
   return (
-    <div>
+    <div className="min-h-screen">
       <Head>
         <title>OEHD</title>
         <meta name="description" content="Over Engineered Homelab Dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className={styles.header}>
-        <div>
-          <h1>OEHD</h1>
-          <span>{info.mitch}</span>
+      <header className="bg-slate-800 h-20">
+        <div className="h-full flex flex-row justify-between items-center">
+          <h1 className="text-4xl ml-8">OEHD</h1>
+          <span className="opacity-50 mr-8 max-w-md text-sm">{info.mitch}</span>
         </div>
       </header>
 
-      <main className={styles.main}>
-        <div className={styles.grid}>
+      <main className="h-full px-16 flex flex-col justify-center items-center">
+        <div className="w-full flex items-center justify-center flex-wrap">
           <DelugeCard cardInfo={info.deluge}></DelugeCard>
         </div>
       </main>
