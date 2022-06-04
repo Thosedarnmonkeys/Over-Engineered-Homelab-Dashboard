@@ -2,20 +2,26 @@ import Image from "next/image";
 
 export default function Card(props) {
   return (
-    <div className="mr-4 p-6 text-left border-2 border-slate-200 rounded-lg w-1/5">
-      <section className="flex justify-between content-center">
-        <a href={props.cardInfo.link}>
-          <h2 className="inline text-2xl mr-6">{props.cardInfo.title}</h2>
-        </a>
-        <Image
-          className="inline"
-          src={props.cardInfo.imagePath}
-          width={40}
-          height={40}
-          layout={"fixed"}
-        ></Image>
-      </section>
-      <section>{props.children}</section>
-    </div>
+    <span className="bg-slate-600 rounded-md w-64 h-28 shadow-md flex flex-row justify-between overflow-clip">
+      <span className="flex flex-col py-4 pl-4">
+        <span className="flex flex-row">
+          <Image
+            src={props.cardInfo.imagePath}
+            width={60}
+            height={60}
+            layout={"fixed"}
+          ></Image>
+          <span className="flex flex-col">
+            <a href={props.cardInfo.link} className="ml-6">
+              <h2 className="inline text-2xl">{props.cardInfo.title}</h2>
+            </a>
+            <section className="ml-4 mt-1">{props.children}</section>
+          </span>
+        </span>
+      </span>
+      <span
+        className={props.cardInfo.isUp ? "w-1 bg-green-400" : "w-1 bg-red-500"}
+      ></span>
+    </span>
   );
 }

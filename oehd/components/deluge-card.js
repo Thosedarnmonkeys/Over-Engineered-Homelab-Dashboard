@@ -4,9 +4,11 @@ import DelugeRPC from "deluge-rpc";
 export default function DelugeCard({ cardInfo }) {
   return (
     <Card cardInfo={cardInfo}>
-      <p>Down: {cardInfo.details.downBytes}B</p>
-      <p>Up: {cardInfo.details.upBytes}B</p>
-      <p>Torrents: {cardInfo.details.torrentCount}</p>
+      <span className="flex flex-row">
+        <p>D: {cardInfo.details.downBytes}B</p>
+        <p>U: {cardInfo.details.upBytes}B</p>
+        <p>C: {cardInfo.details.torrentCount}</p>
+      </span>
     </Card>
   );
 }
