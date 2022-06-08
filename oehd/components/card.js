@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Card(props) {
   return (
     <span className="bg-slate-600 rounded-md w-64 h-28 mr-5 mb-5 shadow-md flex flex-row justify-between overflow-clip">
-      <span className="flex flex-col py-4 pl-4">
+      <span className="h-auto flex flex-col my-auto pl-4">
         <span className="flex flex-row">
         <a href={props.cardInfo.link}>
           <Image

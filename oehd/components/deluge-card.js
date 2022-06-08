@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Card from "./card";
 import DelugeRPC from "deluge-rpc";
 
@@ -5,9 +6,13 @@ export default function DelugeCard({ cardInfo }) {
   return (
     <Card cardInfo={cardInfo}>
       <span className="flex flex-row">
-        <p>D: {cardInfo.details.downBytes}B</p>
-        <p>U: {cardInfo.details.upBytes}B</p>
-        <p>C: {cardInfo.details.torrentCount}</p>
+        <p className="ml-2">C: {cardInfo.details.torrentCount}</p>
+        <p className="ml-2">D: {cardInfo.details.downBytes}B</p>
+        <p className="ml-2">
+          <Image src="/up-arrow.svg" width={10} height={10}>
+          </Image>
+          {cardInfo.details.upBytes}B
+        </p>
       </span>
     </Card>
   );
