@@ -20,7 +20,9 @@ export default function Card(props) {
         </span>
       </span>
       <span
-        className={props.cardInfo.isUp ? "w-1 bg-green-400" : "w-1 bg-red-500"}
+        className={
+          props.cardInfo.isUp ? "w-1 bg-emerald-700" : "w-1 bg-orange-800"
+        }
       ></span>
     </span>
   );
