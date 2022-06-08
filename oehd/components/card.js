@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function Card(props) {
   return (
-    <span className="bg-slate-600 rounded-md w-64 h-28 mr-5 mb-5 shadow-md flex flex-row justify-between overflow-clip">
-      <span className="h-auto flex flex-col my-auto pl-4 pr-5 flex-1">
+    <span className="bg-slate-600 rounded-md w-72 h-32 mr-5 mb-5 shadow-md grid grid-card overflow-clip">
+      <span className="row-start-1 h-auto flex flex-col mt-6 pl-4 pr-7 flex-1">
         <span className="flex flex-row">
           <a href={props.cardInfo.link}>
             <Image
@@ -22,11 +22,17 @@ export default function Card(props) {
             <section className="mt-2">{props.children}</section>
           </span>
         </span>
-        <div></div>
       </span>
+      <div className="border-t row-start-2 flex justify-center">
+        <span className="my-px">
+          <Image src="/plus.svg" width={10} height={10}></Image>
+        </span>
+      </div>
       <span
         className={
-          props.cardInfo.isUp ? "w-1 bg-emerald-700" : "w-1 bg-orange-800"
+          props.cardInfo.isUp
+            ? "w-1 col-start-2 row-start-1 row-span-2 bg-emerald-700"
+            : "w-1 col-start-2 row-start-1 row-span-2 bg-orange-800"
         }
       ></span>
     </span>

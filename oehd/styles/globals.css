@@ -16,6 +16,11 @@ a {
   text-decoration: none;
 }
 
+.grid-card {
+  grid-template-columns: 1fr min-content;
+  grid-template-rows: 1fr min-content;
+}
+
 * {
   color: #d8dee9;
   box-sizing: border-box;
