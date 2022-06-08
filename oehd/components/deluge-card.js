@@ -5,17 +5,43 @@ import DelugeRPC from "deluge-rpc";
 export default function DelugeCard({ cardInfo }) {
   return (
     <Card cardInfo={cardInfo}>
-      <span className="flex flex-row">
-        <p className="ml-2">C: {cardInfo.details.torrentCount}</p>
-        <p className="ml-2">D: {cardInfo.details.downBytes}B</p>
-        <p className="ml-2">
-          <Image src="/up-arrow.svg" width={10} height={10}>
-          </Image>
-          {cardInfo.details.upBytes}B
-        </p>
-      </span>
+      <div className="flex flex-row flex-1 justify-between">
+        <span className="flex flex-col">
+          <Image src="/hash.svg" width={10} height={10}></Image>
+          <p className="text-sm">{cardInfo.details.torrentCount}</p>
+        </span>
+        <span className="flex flex-col">
+          <Image src="/down-arrow.svg" width={10} height={10}></Image>
+          <p className="text-sm">{formatBytes(cardInfo.details.downBytes)}</p>
+        </span>
+        <span className="flex flex-col">
+          <Image src="/up-arrow.svg" width={10} height={10}></Image>
+          <p className="text-sm">{formatBytes(cardInfo.details.upBytes)}</p>
+        </span>
+      </div>
     </Card>
   );
+}
+
+function formatBytes(rate) {
+  let bytes;
+  let unit;
+
+  if (rate < 1000) {
+    bytes = rate;
+    unit = "B";
+  } else if (rate < 1000000) {
+    bytes = rate / 1000;
+    unit = "KB";
+  } else if (rate < 1000000000) {
+    bytes = rate / 1000000;
+    unit = "MB";
+  } else {
+    bytes = rate / 1000000000;
+    unit = "GB";
+  }
+
+  return bytes.toPrecision(3) + unit;
 }
 
 export async function getDelugeInfo() {
