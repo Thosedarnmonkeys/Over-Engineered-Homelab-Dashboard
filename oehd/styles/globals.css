@@ -18,7 +18,7 @@ a {
 
 .grid-card {
   grid-template-columns: 1fr min-content;
-  grid-template-rows: 1fr min-content;
+  grid-template-rows: 1fr min-content min-content;
 }
 
 * {
