@@ -29,19 +29,19 @@ function formatBytes(rate) {
 
   if (rate < 1000) {
     bytes = rate;
-    unit = "B";
+    unit = "b/s";
   } else if (rate < 1000000) {
     bytes = rate / 1000;
-    unit = "KB";
+    unit = "Kb/s";
   } else if (rate < 1000000000) {
     bytes = rate / 1000000;
-    unit = "MB";
+    unit = "Mb/s";
   } else {
     bytes = rate / 1000000000;
-    unit = "GB";
+    unit = "Gb/s";
   }
 
-  return bytes.toPrecision(3) + unit;
+  return bytes.toPrecision(2) + unit;
 }
 
 export async function getDelugeInfo() {

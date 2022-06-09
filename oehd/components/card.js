@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Card(props) {
   return (
     <span className="bg-slate-600 rounded-md w-72 h-32 mr-5 mb-5 shadow-md grid grid-card overflow-clip">
-      <span className="row-start-1 h-auto flex flex-col mt-6 pl-4 pr-7 flex-1">
+      <span className="row-start-1 h-auto flex flex-col mt-8 pl-4 pr-7 flex-1">
         <span className="flex flex-row">
           <a href={props.cardInfo.link}>
             <Image
@@ -23,8 +23,8 @@ export default function Card(props) {
           </span>
         </span>
       </span>
-      <div className="border-t row-start-2 flex justify-center">
-        <span className="my-px">
+      <div className="row-start-2 flex justify-center opacity-0 hover:bg-slate-500 hover:opacity-100 transition-all">
+        <span className="">
           <Image src="/plus.svg" width={10} height={10}></Image>
         </span>
       </div>
