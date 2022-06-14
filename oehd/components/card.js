@@ -9,7 +9,11 @@ export default function Card(props) {
   }
 
   return (
-    <span className="bg-slate-600 rounded-md w-72 h-32 mr-5 mb-5 shadow-md grid grid-card overflow-clip">
+    <span
+      className={`bg-slate-600 rounded-md w-72 mr-5 mb-5 shadow-md grid grid-card overflow-clip childsecshow ${
+        isExpanded ? "" : "h-32"
+      }`}
+    >
       <span className="row-start-1 h-auto flex flex-col pt-8 pl-4 pr-7 flex-1">
         <span className="flex flex-row">
           <a href={props.cardInfo.link}>
@@ -33,20 +37,18 @@ export default function Card(props) {
       <div className={isExpanded ? "row-start-2" : "hidden row-start-2"}>
         STUFFFFF
       </div>
-      <div
+      <footer
         onClick={toggleIsExpanded}
-        className="row-start-3 flex justify-center opacity-0 hover:bg-slate-500 hover:opacity-100 transition-all"
+        className="row-start-3 flex justify-center opacity-0 transition-all"
       >
         <span className="">
           <Image src="/plus.svg" width={10} height={10}></Image>
         </span>
-      </div>
+      </footer>
       <span
-        className={
-          props.cardInfo.isUp
-            ? "w-1 col-start-2 row-start-1 row-span-3 bg-emerald-700"
-            : "w-1 col-start-2 row-start-1 row-span-3 bg-orange-800"
-        }
+        className={`w-1 col-start-2 row-start-1 row-span-3 ${
+          props.cardInfo.isUp ? "bg-emerald-700" : "bg-orange-800"
+        }`}
       ></span>
     </span>
   );

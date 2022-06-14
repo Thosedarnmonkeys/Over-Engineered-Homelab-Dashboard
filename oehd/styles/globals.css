@@ -21,6 +21,12 @@ a {
   grid-template-rows: 1fr min-content min-content;
 }
 
+.childsecshow:hover footer {
+  opacity: 100;
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+}
+
 * {
   color: #d8dee9;
   box-sizing: border-box;
