@@ -19,7 +19,7 @@ export default function Home({ info }) {
         </div>
       </header>
 
-      <main className="max-h-[90vh] w-full p-16 flex flex-row flex-wrap">
+      <main className="max-h-[90vh] w-min p-16 flex flex-col flex-wrap">
         <DelugeCard cardInfo={info.deluge}></DelugeCard>
         <DelugeCard cardInfo={info.deluge}></DelugeCard>
         <DelugeCard cardInfo={info.deluge}></DelugeCard>

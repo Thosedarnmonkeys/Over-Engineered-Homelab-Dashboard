@@ -8,9 +8,15 @@ export default function Card(props) {
     setIsExpanded(!isExpanded);
   }
 
+  const expandedContent = props.cardInfo.error ? (
+    <p className="m-2 text-base text-orange-800">{props.cardInfo.error}</p>
+  ) : (
+    props.children[1]
+  );
+
   return (
     <span
-      className={`bg-slate-600 rounded-md w-72 mr-5 mb-5 shadow-md grid grid-card overflow-clip childsecshow ${
+      className={`bg-slate-600 rounded-md w-80 mr-5 mb-5 shadow-md grid grid-card overflow-clip childsecshow ${
         isExpanded ? "" : "h-32"
       }`}
     >
@@ -30,19 +36,23 @@ export default function Card(props) {
                 {props.cardInfo.title}
               </h2>
             </a>
-            <section className="mt-2">{props.children}</section>
+            <section className="mt-2">{props.children[0]}</section>
           </span>
         </span>
       </span>
       <div className={isExpanded ? "row-start-2" : "hidden row-start-2"}>
-        STUFFFFF
+        {expandedContent}
       </div>
       <footer
         onClick={toggleIsExpanded}
         className="row-start-3 flex justify-center opacity-0 transition-all cursor-pointer"
       >
         <span className="">
-          <Image src="/icons/plus.svg" width={10} height={10}></Image>
+          <Image
+            src={isExpanded ? "/icons/minus.svg" : "/icons/plus.svg"}
+            width={10}
+            height={10}
+          ></Image>
         </span>
       </footer>
       <span
