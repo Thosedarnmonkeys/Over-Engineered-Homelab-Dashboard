@@ -7,15 +7,15 @@ export default function DelugeCard({ cardInfo }) {
     <Card cardInfo={cardInfo}>
       <div className="flex flex-row flex-1 justify-between">
         <span className="flex flex-col">
-          <Image src="/hash.svg" width={10} height={10}></Image>
+          <Image src="/icons/hash.svg" width={10} height={10}></Image>
           <p className="text-sm">{cardInfo.details.torrentCount}</p>
         </span>
         <span className="flex flex-col">
-          <Image src="/down-arrow.svg" width={10} height={10}></Image>
+          <Image src="/icons/down-arrow.svg" width={10} height={10}></Image>
           <p className="text-sm">{formatBytes(cardInfo.details.downBytes)}</p>
         </span>
         <span className="flex flex-col">
-          <Image src="/up-arrow.svg" width={10} height={10}></Image>
+          <Image src="/icons/up-arrow.svg" width={10} height={10}></Image>
           <p className="text-sm">{formatBytes(cardInfo.details.upBytes)}</p>
         </span>
       </div>
@@ -48,7 +48,7 @@ export async function getDelugeInfo() {
   const delugeInfo = {
     title: "Deluge",
     link: "https://deluge.damnserver.com",
-    imagePath: "/deluge.png",
+    imagePath: "/appicons/deluge.png",
     isUp: false,
   };
 

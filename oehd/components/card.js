@@ -42,7 +42,7 @@ export default function Card(props) {
         className="row-start-3 flex justify-center opacity-0 transition-all cursor-pointer"
       >
         <span className="">
-          <Image src="/plus.svg" width={10} height={10}></Image>
+          <Image src="/icons/plus.svg" width={10} height={10}></Image>
         </span>
       </footer>
       <span
