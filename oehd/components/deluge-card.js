@@ -27,10 +27,16 @@ export default function DelugeCard({ cardInfo }) {
       <span className="text-sm col-start-2" style={{ gridRowStart: row }}>
         {progress}
       </span>,
-      <span className="text-sm col-start-3" style={{ gridRowStart: row }}>
+      <span
+        className="text-sm col-start-3 content-end text-right"
+        style={{ gridRowStart: row }}
+      >
         {formatBytes(t.downBytes)}
       </span>,
-      <span className="text-sm col-start-4" style={{ gridRowStart: row }}>
+      <span
+        className="text-sm col-start-4 text-right"
+        style={{ gridRowStart: row }}
+      >
         {formatBytes(t.upBytes)}
       </span>,
     ];
@@ -76,18 +82,15 @@ function formatBytes(rate) {
   let bytes;
   let unit;
 
-  if (rate < 1000) {
-    bytes = rate;
-    unit = "b/s";
-  } else if (rate < 1000000) {
+  if (rate < 1000000) {
     bytes = rate / 1000;
-    unit = "Kb/s";
+    unit = "Kb";
   } else if (rate < 1000000000) {
     bytes = rate / 1000000;
-    unit = "Mb/s";
+    unit = "Mb";
   } else {
     bytes = rate / 1000000000;
-    unit = "Gb/s";
+    unit = "Gb";
   }
 
   return bytes.toPrecision(bytes > 0 ? 2 : 1) + unit;
