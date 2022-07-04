@@ -16,7 +16,7 @@ export default function Card(props) {
 
   return (
     <span
-      className={`bg-slate-600 rounded-md w-80 mr-5 mb-5 shadow-md grid grid-card overflow-clip childsecshow ${
+      className={`bg-slate-600 rounded-md w-96 mr-5 mb-5 shadow-md grid grid-card overflow-clip childsecshow ${
         isExpanded ? "" : "h-32"
       }`}
     >
