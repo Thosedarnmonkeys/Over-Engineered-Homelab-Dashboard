@@ -1,9 +1,21 @@
+import { useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import mitch from "../mitch.json";
 import { rand } from "../utils.js";
 import DelugeCard, { getDelugeInfo } from "../components/deluge-card";
 
 export default function Home({ info }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      router.replace(router.asPath);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Head>
@@ -20,13 +32,6 @@ export default function Home({ info }) {
       </header>
 
       <main className="max-h-[90vh] w-min p-16 flex flex-col flex-wrap">
-        <DelugeCard cardInfo={info.deluge}></DelugeCard>
-        <DelugeCard cardInfo={info.deluge}></DelugeCard>
-        <DelugeCard cardInfo={info.deluge}></DelugeCard>
-        <DelugeCard cardInfo={info.deluge}></DelugeCard>
-        <DelugeCard cardInfo={info.deluge}></DelugeCard>
-        <DelugeCard cardInfo={info.deluge}></DelugeCard>
-        <DelugeCard cardInfo={info.deluge}></DelugeCard>
         <DelugeCard cardInfo={info.deluge}></DelugeCard>
       </main>
     </div>
