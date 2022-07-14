@@ -1,17 +1,31 @@
 import Image from "next/image";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
-export default function Card(props) {
+export class CardInfo {
+  title: string = "";
+  link: string = "";
+  imagePath: string = "";
+  isUp: boolean = false;
+  error?: string;
+}
+
+export default function Card({
+  cardInfo,
+  children,
+}: {
+  cardInfo: CardInfo;
+  children: ReactNode[];
+}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   function toggleIsExpanded() {
     setIsExpanded(!isExpanded);
   }
 
-  const expandedContent = props.cardInfo.error ? (
-    <p className="m-2 text-base text-orange-800">{props.cardInfo.error}</p>
+  const expandedContent = cardInfo.error ? (
+    <p className="m-2 text-base text-orange-800">{cardInfo.error}</p>
   ) : (
-    props.children[1]
+    children[1]
   );
 
   return (
@@ -22,21 +36,19 @@ export default function Card(props) {
     >
       <span className="row-start-1 h-auto flex flex-col pt-8 pl-4 pr-7 flex-1">
         <span className="flex flex-row">
-          <a href={props.cardInfo.link}>
+          <a href={cardInfo.link}>
             <Image
-              src={props.cardInfo.imagePath}
+              src={cardInfo.imagePath}
               width={60}
               height={60}
               layout={"fixed"}
             ></Image>
           </a>
           <span className="flex flex-col flex-1 ml-6 w-max">
-            <a href={props.cardInfo.link}>
-              <h2 className="inline text-2xl leading-5">
-                {props.cardInfo.title}
-              </h2>
+            <a href={cardInfo.link}>
+              <h2 className="inline text-2xl leading-5">{cardInfo.title}</h2>
             </a>
-            <section className="mt-2">{props.children[0]}</section>
+            <section className="mt-2">{children[0]}</section>
           </span>
         </span>
       </span>
@@ -57,7 +69,7 @@ export default function Card(props) {
       </footer>
       <span
         className={`w-1 col-start-2 row-start-1 row-span-3 ${
-          props.cardInfo.isUp ? "bg-emerald-700" : "bg-orange-800"
+          cardInfo.isUp ? "bg-emerald-700" : "bg-orange-800"
         }`}
       ></span>
     </span>

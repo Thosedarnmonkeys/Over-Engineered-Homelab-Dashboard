@@ -2,10 +2,19 @@ import { useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import mitch from "../mitch.json";
-import { rand } from "../utils.js";
-import DelugeCard, { getDelugeInfo } from "../components/deluge-card";
+import { rand } from "../utils.ts";
+import DelugeCard, {
+  DelugeCardInfo,
+  getDelugeInfo,
+} from "../components/deluge-card";
+import { GetServerSideProps } from "next";
 
-export default function Home({ info }) {
+export class DashboardInfo {
+  mitch: string = "";
+  deluge?: DelugeCardInfo;
+}
+
+export default function Home({ info }: { info: DashboardInfo }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -15,6 +24,11 @@ export default function Home({ info }) {
 
     return () => clearInterval(interval);
   }, []);
+
+  const cards = [];
+  if (info.deluge) {
+    cards.push(<DelugeCard cardInfo={info.deluge}></DelugeCard>);
+  }
 
   return (
     <div className="min-h-screen">
@@ -32,18 +46,18 @@ export default function Home({ info }) {
       </header>
 
       <main className="max-h-[90vh] w-min p-16 flex flex-col flex-wrap">
-        <DelugeCard cardInfo={info.deluge}></DelugeCard>
+        {cards}
       </main>
     </div>
   );
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const mitchQuote = mitch[rand(0, mitch.length - 1)];
   const deluge = await getDelugeInfo();
 
-  const info = { ["mitch"]: mitchQuote, ["deluge"]: deluge };
+  const info = { mitch: mitchQuote, deluge };
   return {
     props: { info },
   };
-}
+};
