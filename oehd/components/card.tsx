@@ -23,7 +23,7 @@ export default function Card({
   }
 
   const expandedContent = cardInfo.error ? (
-    <p className="m-2 text-base text-orange-800">{cardInfo.error}</p>
+    <p className="m-2 text-base text-red-200">{cardInfo.error}</p>
   ) : (
     children[1]
   );
@@ -34,7 +34,7 @@ export default function Card({
         isExpanded ? "" : "h-32"
       }`}
     >
-      <span className="row-start-1 h-auto flex flex-col pt-8 pl-4 pr-7 flex-1">
+      <span className="row-start-1 h-auto flex flex-col pt-8 pl-6 pr-7 flex-1">
         <span className="flex flex-row">
           <a href={cardInfo.link}>
             <Image
@@ -59,7 +59,7 @@ export default function Card({
         onClick={toggleIsExpanded}
         className="row-start-3 flex justify-center opacity-0 transition-all cursor-pointer"
       >
-        <span className="">
+        <span>
           <Image
             src={isExpanded ? "/icons/minus.svg" : "/icons/plus.svg"}
             width={10}

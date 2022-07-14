@@ -3,15 +3,20 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import mitch from "../mitch.json";
 import { rand } from "../utils.ts";
+import { GetServerSideProps } from "next";
 import DelugeCard, {
   DelugeCardInfo,
   getDelugeInfo,
 } from "../components/deluge-card";
-import { GetServerSideProps } from "next";
+import SonarrCard, {
+  getSonarrInfo,
+  SonarrCardInfo,
+} from "../components/sonarr-card";
 
 export class DashboardInfo {
   mitch: string = "";
   deluge?: DelugeCardInfo;
+  sonarr?: SonarrCardInfo;
 }
 
 export default function Home({ info }: { info: DashboardInfo }) {
@@ -28,6 +33,9 @@ export default function Home({ info }: { info: DashboardInfo }) {
   const cards = [];
   if (info.deluge) {
     cards.push(<DelugeCard cardInfo={info.deluge}></DelugeCard>);
+  }
+  if (info.sonarr) {
+    cards.push(<SonarrCard cardInfo={info.sonarr}></SonarrCard>);
   }
 
   return (
@@ -55,8 +63,9 @@ export default function Home({ info }: { info: DashboardInfo }) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const mitchQuote = mitch[rand(0, mitch.length - 1)];
   const deluge = await getDelugeInfo();
+  const sonarr = await getSonarrInfo();
 
-  const info = { mitch: mitchQuote, deluge };
+  const info = { mitch: mitchQuote, deluge, sonarr };
   return {
     props: { info },
   };
