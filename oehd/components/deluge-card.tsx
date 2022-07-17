@@ -89,7 +89,7 @@ export default function DelugeCard({ cardInfo }: { cardInfo: DelugeCardInfo }) {
         style={{
           gridTemplateRows:
             Array(cardInfo.details?.torrentCount).fill("1fr").join(" ") + ";",
-          gridTemplateColumns: "1fr mincontent mincontent mincontent;",
+          gridTemplateColumns: "1fr mincontent mincontent mincontent",
         }}
       >
         {gridRows}
