@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import mitch from "../mitch.json";
-import { rand } from "../utils.ts";
 import { GetServerSideProps } from "next";
 import DelugeCard, {
   DelugeCardInfo,
@@ -12,6 +10,7 @@ import SonarrCard, {
   getSonarrInfo,
   SonarrCardInfo,
 } from "../components/sonarr-card";
+import mitchQuotes from "../mitchQuotes.json";
 
 export class DashboardInfo {
   mitch: string = "";
@@ -61,12 +60,25 @@ export default function Home({ info }: { info: DashboardInfo }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const mitchQuote = mitch[rand(0, mitch.length - 1)];
+  const mitch = getMitchQuote();
   const deluge = await getDelugeInfo();
   const sonarr = await getSonarrInfo();
 
-  const info = { mitch: mitchQuote, deluge, sonarr };
+  const info = { mitch, deluge, sonarr };
   return {
     props: { info },
   };
 };
+
+export function getMitchQuote(): string {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const diff = now - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const day = Math.floor(diff / oneDay);
+
+  const seedrandom = require("seedrandom");
+  const randomGen = seedrandom(day);
+
+  return mitchQuotes[Math.floor(randomGen() * (mitchQuotes.length - 1))];
+}
