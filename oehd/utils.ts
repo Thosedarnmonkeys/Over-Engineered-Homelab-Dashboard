@@ -26,11 +26,13 @@ export function formatBytes(
     unit = "Gb";
   }
 
-  return (
-    parseFloat(
-      displayBytes.toPrecision(displayBytes > 0 ? precision + 1 : precision)
-    ) +
-    " " +
-    unit
+  const displayfloat = parseFloat(
+    displayBytes.toPrecision(displayBytes > 0 ? precision + 1 : precision)
   );
+
+  if (displayfloat === 0) {
+    return "-";
+  }
+
+  return displayfloat + " " + unit;
 }
