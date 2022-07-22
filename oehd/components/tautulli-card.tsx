@@ -34,10 +34,22 @@ export default function TautulliCard({
       const imagePath =
         x.location === "lan" ? "/icons/lan.svg" : "/icons/globe.svg";
       return (
-        <div className="bg-slate-500 rounded-md mt-2">
-          {x.userName} {x.playingName} {x.progress}{" "}
-          <Image src={imagePath} width={12} height={12}></Image>
-          {formatBytes(x.bandwidth, 1, 1000)}
+        <div className="m-1 flex">
+          <div className="h-16 w-12 bg-slate-800"></div>
+          <div className="m-1 flex flex-col w-full">
+            <div className="flex justify-between">
+              <span>{x.playingName}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>{x.userName}</span>
+              <span>
+                <Image src={imagePath} width={12} height={12}></Image>
+                <span className="ml-1">
+                  {formatBytes(x.bandwidth, 1, 1000)}
+                </span>
+              </span>
+            </div>
+          </div>
         </div>
       );
     });
