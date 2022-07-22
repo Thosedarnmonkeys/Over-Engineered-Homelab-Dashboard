@@ -36,7 +36,7 @@ export default function TautulliCard({
       return (
         <div className="m-1 flex">
           <div className="h-16 w-12 bg-slate-800"></div>
-          <div className="m-1 flex flex-col w-full">
+          <div className="m-1 flex flex-col justify-between w-full my-2 text-sm">
             <div className="flex justify-between">
               <span>{x.playingName}</span>
             </div>

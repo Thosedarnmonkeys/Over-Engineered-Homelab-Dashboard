@@ -60,7 +60,7 @@ export default function Home({ info }: { info: DashboardInfo }) {
         </div>
       </header>
 
-      <main className="max-h-[90vh] w-min p-16 flex flex-col flex-wrap">
+      <main className="max-h-[90vh] w-min pt-16 pl-16 pr-16 flex flex-col flex-wrap">
         {cards}
       </main>
     </div>
