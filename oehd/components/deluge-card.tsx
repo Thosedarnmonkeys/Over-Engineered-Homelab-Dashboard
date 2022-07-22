@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Card, { CardInfo } from "./card";
 import DelugeRPC from "deluge-rpc";
+import Card, { CardInfo } from "./card";
+import { formatBytes } from "../utils";
 
 export class Torrent {
   name: string = "";
@@ -50,13 +51,13 @@ export default function DelugeCard({ cardInfo }: { cardInfo: DelugeCardInfo }) {
           className="text-sm col-start-3 content-end text-right"
           style={{ gridRowStart: row }}
         >
-          {formatBytes(t.downBytes)}
+          {formatBytes(t.downBytes, 1)}
         </span>,
         <span
           className="text-sm col-start-4 text-right"
           style={{ gridRowStart: row }}
         >
-          {formatBytes(t.upBytes)}
+          {formatBytes(t.upBytes, 1)}
         </span>,
       ];
 
@@ -68,19 +69,19 @@ export default function DelugeCard({ cardInfo }: { cardInfo: DelugeCardInfo }) {
     <Card cardInfo={cardInfo}>
       <div className="flex flex-1 justify-between">
         <span className="flex">
-          <Image src="/icons/hash.svg" width={10} height={10}></Image>
+          <Image src="/icons/hash.svg" width={12} height={12}></Image>
           <p className="ml-1 text-sm">{cardInfo.details?.torrentCount ?? 0}</p>
         </span>
         <span className="flex">
-          <Image src="/icons/down-arrow.svg" width={10} height={10}></Image>
+          <Image src="/icons/down-arrow.svg" width={12} height={12}></Image>
           <p className="ml-1 text-sm">
-            {formatBytes(cardInfo.details?.downBytes ?? 0)}
+            {formatBytes(cardInfo.details?.downBytes ?? 0, 2)}
           </p>
         </span>
         <span className="flex">
-          <Image src="/icons/up-arrow.svg" width={10} height={10}></Image>
+          <Image src="/icons/up-arrow.svg" width={12} height={12}></Image>
           <p className="ml-1 text-sm">
-            {formatBytes(cardInfo.details?.upBytes ?? 0)}
+            {formatBytes(cardInfo.details?.upBytes ?? 0, 2)}
           </p>
         </span>
       </div>
@@ -96,24 +97,6 @@ export default function DelugeCard({ cardInfo }: { cardInfo: DelugeCardInfo }) {
       </div>
     </Card>
   );
-}
-
-function formatBytes(rate: number): string {
-  let bytes: number;
-  let unit: string;
-
-  if (rate < 1000000) {
-    bytes = rate / 1000;
-    unit = "Kb";
-  } else if (rate < 1000000000) {
-    bytes = rate / 1000000;
-    unit = "Mb";
-  } else {
-    bytes = rate / 1000000000;
-    unit = "Gb";
-  }
-
-  return bytes.toPrecision(bytes > 0 ? 2 : 1) + unit;
 }
 
 export async function getDelugeInfo(): Promise<DelugeCardInfo> {

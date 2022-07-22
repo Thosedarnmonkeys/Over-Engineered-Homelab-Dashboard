@@ -48,7 +48,7 @@ export default function Card({
             <a href={cardInfo.link}>
               <h2 className="inline text-2xl leading-5">{cardInfo.title}</h2>
             </a>
-            <section className="mt-2">{children[0]}</section>
+            <section className="mt-3">{children[0]}</section>
           </span>
         </span>
       </span>
