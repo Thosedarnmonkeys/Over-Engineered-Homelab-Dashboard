@@ -8,6 +8,7 @@ export class StreamDetail {
   playingName: string = "";
   progress: number = 0;
   bandwidth: number = 0;
+  location: "lan" | "wan" = "wan";
 }
 
 export class TautulliDetails {
@@ -29,12 +30,17 @@ export default function TautulliCard({
 }) {
   let streams: ReactNode[] = [];
   if (cardInfo.details) {
-    const streamsParts = cardInfo.details.streams.map((x) => (
-      <div>
-        {x.userName} {x.playingName} {x.progress}{" "}
-        {formatBytes(x.bandwidth, 1, 1000)}
-      </div>
-    ));
+    const streamsParts = cardInfo.details.streams.map((x) => {
+      const imagePath =
+        x.location === "lan" ? "/icons/lan.svg" : "/icons/globe.svg";
+      return (
+        <div className="bg-slate-500 rounded-md mt-2">
+          {x.userName} {x.playingName} {x.progress}{" "}
+          <Image src={imagePath} width={12} height={12}></Image>
+          {formatBytes(x.bandwidth, 1, 1000)}
+        </div>
+      );
+    });
     streams = streams.concat(streamsParts);
   }
 
@@ -58,7 +64,7 @@ export default function TautulliCard({
           </p>
         </span>
       </div>
-      <div>{streams}</div>
+      <div className="flex flex-col my-3 mx-4">{streams}</div>
     </Card>
   );
 }
@@ -95,6 +101,7 @@ export async function getTautulliInfo(): Promise<TautulliCardInfo> {
       playingName: x.full_title,
       progress: x.progress_percent,
       bandwidth: x.bandwidth,
+      location: x.location,
     })) ?? [];
 
   const details = {

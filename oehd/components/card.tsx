@@ -23,7 +23,9 @@ export default function Card({
   }
 
   const expandedContent = cardInfo.error ? (
-    <p className="m-2 text-base text-red-200">{cardInfo.error}</p>
+    <div className="flex justify-center items-center">
+      <p className="m-2 text-base text-red-200">{cardInfo.error}</p>
+    </div>
   ) : (
     children[1]
   );
