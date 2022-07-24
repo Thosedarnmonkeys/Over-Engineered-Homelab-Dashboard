@@ -10,13 +10,13 @@ export default async function handler(
   const PlexAPI = require("plex-api");
   const plexClient = new PlexAPI({
     hostname: "192.168.0.165",
-    port: 32400,
     token: "1iejXXysyYxNesLys7ov",
-    username: "thosedarnmonkeys",
   });
 
   const image = await plexClient.query(joinedUrl);
+  const buffer = Buffer.from(image, "binary");
+  const img = Uint8Array.from(buffer).buffer;
 
   res.setHeader("Content-Type", "image/jpeg");
-  res.end(image);
+  res.end(img);
 }

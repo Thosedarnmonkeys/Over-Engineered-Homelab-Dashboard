@@ -36,12 +36,12 @@ export default function TautulliCard({
         x.location === "lan" ? "/icons/lan.svg" : "/icons/globe.svg";
       return (
         <div className="m-1 flex">
-          <div
-            className="h-16 w-12 bg-slate-800"
-            style={{
-              backgroundImage: `url(api/pleximage${x.thumbnail})`,
-            }}
-          ></div>
+          <Image
+            src={`/api/pleximage${x.thumbnail}`}
+            width={48}
+            height={64}
+          ></Image>
+
           <div className="m-1 flex flex-col justify-between w-full my-2 text-sm">
             <div className="flex justify-between">
               <span>{x.playingName}</span>
