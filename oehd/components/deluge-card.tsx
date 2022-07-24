@@ -44,17 +44,24 @@ export default function DelugeCard({ cardInfo }: { cardInfo: DelugeCardInfo }) {
         >
           {t.name}
         </span>,
-        <span className="text-sm col-start-2" style={{ gridRowStart: row }}>
+        <span
+          className="text-sm col-start-2 text-right"
+          style={{ gridRowStart: row }}
+        >
           {progress}
         </span>,
         <span
-          className="text-sm col-start-3 content-end text-right"
+          className={`text-sm col-start-3 ${
+            t.downBytes === 0 ? "text-center" : "text-right"
+          }`}
           style={{ gridRowStart: row }}
         >
           {formatBytes(t.downBytes, 1)}
         </span>,
         <span
-          className="text-sm col-start-4 text-right"
+          className={`text-sm col-start-4 ${
+            t.upBytes === 0 ? "text-center" : "text-right"
+          }`}
           style={{ gridRowStart: row }}
         >
           {formatBytes(t.upBytes, 1)}
@@ -90,7 +97,7 @@ export default function DelugeCard({ cardInfo }: { cardInfo: DelugeCardInfo }) {
         style={{
           gridTemplateRows:
             Array(cardInfo.details?.torrentCount).fill("1fr").join(" ") + ";",
-          gridTemplateColumns: "1fr mincontent mincontent mincontent",
+          gridTemplateColumns: "9fr 1fr 2fr 2fr",
         }}
       >
         {gridRows}
