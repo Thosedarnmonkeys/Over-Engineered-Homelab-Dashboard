@@ -29,7 +29,7 @@ export default function Home({ info }: { info: DashboardInfo }) {
   useEffect(() => {
     const interval = setInterval(() => {
       router.replace(router.asPath);
-    }, 2000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);

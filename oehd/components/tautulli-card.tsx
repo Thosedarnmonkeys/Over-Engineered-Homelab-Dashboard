@@ -31,7 +31,7 @@ export default function TautulliCard({
   let streams: ReactNode[] = [];
   if (cardInfo.details) {
     const streamsParts = cardInfo.details.streams.map((x) => {
-      const imagePath =
+      const locationImagePath =
         x.location === "lan" ? "/icons/lan.svg" : "/icons/globe.svg";
       return (
         <div className="m-1 flex">
@@ -43,7 +43,7 @@ export default function TautulliCard({
             <div className="flex justify-between">
               <span>{x.userName}</span>
               <span>
-                <Image src={imagePath} width={12} height={12}></Image>
+                <Image src={locationImagePath} width={12} height={12}></Image>
                 <span className="ml-1">
                   {formatBytes(x.bandwidth, 1, 1000)}
                 </span>
