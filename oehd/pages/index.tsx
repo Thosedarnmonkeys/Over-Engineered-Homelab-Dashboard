@@ -69,11 +69,12 @@ export default function Home({ info }: { info: DashboardInfo }) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const mitch = getMitchQuote();
-  const deluge = await getDelugeInfo();
-  const sonarr = await getSonarrInfo();
+  // const deluge = await getDelugeInfo();
+  // const sonarr = await getSonarrInfo();
   const tautulli = await getTautulliInfo();
 
-  const info = { mitch, deluge, sonarr, tautulli };
+  // const info = { mitch, deluge, sonarr, tautulli };
+  const info = { mitch, tautulli };
   return {
     props: { info },
   };

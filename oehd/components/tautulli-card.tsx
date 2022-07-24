@@ -9,6 +9,7 @@ export class StreamDetail {
   progress: number = 0;
   bandwidth: number = 0;
   location: "lan" | "wan" = "wan";
+  thumbnail: any;
 }
 
 export class TautulliDetails {
@@ -35,7 +36,12 @@ export default function TautulliCard({
         x.location === "lan" ? "/icons/lan.svg" : "/icons/globe.svg";
       return (
         <div className="m-1 flex">
-          <div className="h-16 w-12 bg-slate-800"></div>
+          <div
+            className="h-16 w-12 bg-slate-800"
+            style={{
+              backgroundImage: `url(api/pleximage${x.thumbnail})`,
+            }}
+          ></div>
           <div className="m-1 flex flex-col justify-between w-full my-2 text-sm">
             <div className="flex justify-between">
               <span>{x.playingName}</span>
@@ -114,6 +120,7 @@ export async function getTautulliInfo(): Promise<TautulliCardInfo> {
       progress: x.progress_percent,
       bandwidth: x.bandwidth,
       location: x.location,
+      thumbnail: x.grandparent_thumb,
     })) ?? [];
 
   const details = {

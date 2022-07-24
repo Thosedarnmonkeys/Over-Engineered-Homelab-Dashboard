@@ -95,8 +95,9 @@ export default function DelugeCard({ cardInfo }: { cardInfo: DelugeCardInfo }) {
       <div
         className="my-3 mx-4 grid gap-x-3 gap-y-1"
         style={{
-          gridTemplateRows:
-            Array(cardInfo.details?.torrentCount).fill("1fr").join(" ") + ";",
+          gridTemplateRows: Array(cardInfo.details?.torrentCount)
+            .fill("1fr")
+            .join(" "),
           gridTemplateColumns: "9fr 1fr 2fr 2fr",
         }}
       >
