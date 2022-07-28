@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Card, { CardInfo } from "./card";
 import { formatBytes } from "../utils";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 export class StreamDetail {
   userName: string = "";
+  mediaType: "movie" | "episode" = "movie";
   playingName: string = "";
   progress: number = 0;
   bandwidth: number = 0;
   location: "lan" | "wan" = "wan";
-  thumbnail: any;
+  libraryItemId: string = "";
+  thumbnailId: string = "";
 }
 
 export class TautulliDetails {
@@ -36,11 +38,7 @@ export default function TautulliCard({
         x.location === "lan" ? "/icons/lan.svg" : "/icons/globe.svg";
       return (
         <div className="m-1 flex">
-          <Image
-            src={`/api/pleximage${x.thumbnail}`}
-            width={48}
-            height={64}
-          ></Image>
+          <img src={`/api/pleximage/${x.libraryItemId}/${x.thumbnailId}`}></img>
 
           <div className="m-1 flex flex-col justify-between w-full my-2 text-sm">
             <div className="flex justify-between">
@@ -114,14 +112,28 @@ export async function getTautulliInfo(): Promise<TautulliCardInfo> {
   const lanBandwidth = data.lan_bandwidth;
   const wanBandwidth = data.wan_bandwidth;
   const streams =
-    data.sessions?.map((x: any) => ({
-      userName: x.username,
-      playingName: x.full_title,
-      progress: x.progress_percent,
-      bandwidth: x.bandwidth,
-      location: x.location,
-      thumbnail: x.grandparent_thumb,
-    })) ?? [];
+    data.sessions?.map((x: any) => {
+      const mediaType = x.media_type;
+      let thumbnailId, libraryItemId;
+      if (mediaType === "movie") {
+        libraryItemId = getLibraryItemId(x.thumb);
+        thumbnailId = getThumbnailId(x.thumb);
+      } else if (mediaType === "episode") {
+        libraryItemId = getLibraryItemId(x.grandparent_thumb);
+        thumbnailId = getThumbnailId(x.grandparent_thumb);
+      }
+
+      return {
+        mediaType,
+        libraryItemId,
+        thumbnailId,
+        userName: x.username,
+        playingName: x.full_title,
+        progress: x.progress_percent,
+        bandwidth: x.bandwidth,
+        location: x.location,
+      };
+    }) ?? [];
 
   const details = {
     streamCount,
@@ -134,4 +146,14 @@ export async function getTautulliInfo(): Promise<TautulliCardInfo> {
   tautulliInfo.details = details;
   tautulliInfo.isUp = true;
   return tautulliInfo;
+}
+
+function getLibraryItemId(url: string): string {
+  const urlPart = url.split("/");
+  return urlPart[3];
+}
+
+function getThumbnailId(url: string): string {
+  const index = url.lastIndexOf("/");
+  return url.substring(index + 1);
 }
