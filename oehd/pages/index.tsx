@@ -60,7 +60,7 @@ export default function Home({ info }: { info: DashboardInfo }) {
         </div>
       </header>
 
-      <main className="max-h-[90vh] w-min pt-16 pl-16 pr-16 flex flex-col flex-wrap">
+      <main className="max-h-[90vh] pt-16 pl-16 pr-16 flex flex-wrap">
         {cards}
       </main>
     </div>
@@ -69,12 +69,12 @@ export default function Home({ info }: { info: DashboardInfo }) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const mitch = getMitchQuote();
-  // const deluge = await getDelugeInfo();
-  // const sonarr = await getSonarrInfo();
+  const deluge = await getDelugeInfo();
+  const sonarr = await getSonarrInfo();
   const tautulli = await getTautulliInfo();
 
-  // const info = { mitch, deluge, sonarr, tautulli };
-  const info = { mitch, tautulli };
+  const info = { mitch, deluge, sonarr, tautulli };
+  //  const info = { mitch, tautulli };
   return {
     props: { info },
   };

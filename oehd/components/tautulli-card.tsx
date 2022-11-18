@@ -37,7 +37,7 @@ export default function TautulliCard({
       const locationImagePath =
         x.location === "lan" ? "/icons/lan.svg" : "/icons/globe.svg";
       return (
-        <div className="m-1 flex">
+        <div className="m-1 flex" key={x.userName + x.libraryItemId}>
           <img src={`/api/pleximage/${x.libraryItemId}/${x.thumbnailId}`}></img>
 
           <div className="m-1 flex flex-col justify-between w-full my-2 text-sm">
