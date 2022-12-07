@@ -21,6 +21,10 @@ a {
   grid-template-rows: 1fr min-content min-content;
 }
 
+.deluge-cols {
+  grid-template-columns: repeat(3, 12px 1fr);
+}
+
 .childsecshow:hover footer {
   opacity: 100;
   --tw-bg-opacity: 1;

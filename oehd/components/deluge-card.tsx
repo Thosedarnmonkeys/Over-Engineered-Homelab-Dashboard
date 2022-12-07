@@ -74,23 +74,34 @@ export default function DelugeCard({ cardInfo }: { cardInfo: DelugeCardInfo }) {
 
   return (
     <Card cardInfo={cardInfo}>
-      <div className="flex flex-1 justify-between">
-        <span className="flex">
-          <Image src="/icons/hash.svg" width={12} height={12}></Image>
-          <p className="ml-1 text-sm">{cardInfo.details?.torrentCount ?? 0}</p>
+      <div className="grid deluge-cols">
+        <Image
+          className="col-start-1"
+          src="/icons/hash.svg"
+          width={12}
+          height={12}
+        ></Image>
+        <span className="col-start-2 ml-1 text-sm">
+          {cardInfo.details?.torrentCount ?? 0}
         </span>
-        <span className="flex">
-          <Image src="/icons/down-arrow.svg" width={12} height={12}></Image>
-          <p className="ml-1 text-sm">
-            {formatBytes(cardInfo.details?.downBytes ?? 0, 2)}
-          </p>
-        </span>
-        <span className="flex">
-          <Image src="/icons/up-arrow.svg" width={12} height={12}></Image>
-          <p className="ml-1 text-sm">
-            {formatBytes(cardInfo.details?.upBytes ?? 0, 2)}
-          </p>
-        </span>
+        <Image
+          className="col-start-3"
+          src="/icons/down-arrow.svg"
+          width={12}
+          height={12}
+        ></Image>
+        <p className="col-start-4 ml-1 text-sm">
+          {formatBytes(cardInfo.details?.downBytes ?? 0, 2)}
+        </p>
+        <Image
+          className="col-start-5"
+          src="/icons/up-arrow.svg"
+          width={12}
+          height={12}
+        ></Image>
+        <p className="col-start-6 ml-1 text-sm">
+          {formatBytes(cardInfo.details?.upBytes ?? 0, 2)}
+        </p>
       </div>
       <div
         className="my-3 mx-4 grid gap-x-3 gap-y-1"
